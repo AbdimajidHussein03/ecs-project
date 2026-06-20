@@ -2,3 +2,29 @@
 .env
 *.env
 app/.env
+app/.env*
+!app/.env.example
+
+# Dependencies
+app/vendor/
+app/node_modules/
+
+# Laravel runtime files
+app/storage/logs/*
+app/storage/framework/cache/*
+app/storage/framework/sessions/*
+app/storage/framework/views/*
+
+# Terraform local files/state
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# OS / editor files
+.DS_Store
+.vscode/
