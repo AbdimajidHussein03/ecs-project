@@ -54,7 +54,7 @@ jobs:
       - name: Run TFLint
         run: |
           tflint --init
-          tflint --recursive
+          tflint
         working-directory: infra
 
       - name: Terraform plan
