@@ -1,4 +1,4 @@
-name: Terraform Plan Pipeline 
+name: Terraform Plan Pipeline
 
 on:
   push:
@@ -53,8 +53,8 @@ jobs:
 
       - name: Run TFLint
         run: |
-          tflint --init --config ../.tflint.hcl
-          tflint --recursive --config ../.tflint.hcl .
+          tflint --init
+          tflint --recursive
         working-directory: infra
 
       - name: Terraform plan
