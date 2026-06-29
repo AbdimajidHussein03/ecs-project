@@ -28,11 +28,18 @@ jobs:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Confirm AWS identity
+        run: aws sts get-caller-identity
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform init
         run: terraform init
+        working-directory: infra
+
+      - name: Terraform plan destroy
+        run: terraform plan -destroy
         working-directory: infra
 
       - name: Terraform destroy
