@@ -1,0 +1,40 @@
+name: Terraform Destroy Pipeline
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: eu-west-2
+  AWS_ROLE_ARN: arn:aws:iam::583931059504:role/snipe-it-github-actions-role
+  TF_VAR_db_password: ${{ secrets.TF_DB_PASSWORD }}
+  TF_VAR_app_key: ${{ secrets.TF_APP_KEY }}
+
+jobs:
+  terraform-destroy:
+    name: Terraform Destroy Infrastructure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials with OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform init
+        run: terraform init
+        working-directory: infra
+
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
+        working-directory: infra
