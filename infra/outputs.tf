@@ -88,7 +88,3 @@ output "app_url" {
   value       = "https://${local.app_domain}"
 }
 
-output "github_actions_role_arn" {
-  description = "IAM role ARN used by GitHub Actions"
-  value       = module.iam.github_actions_role_arn
-}
