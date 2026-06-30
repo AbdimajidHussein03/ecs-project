@@ -80,7 +80,7 @@ Below is the deployed Snipe-IT dashboard.
 
 ## Live Application
 
-![Snipe-IT Dashboard]<img width="1872" height="1107" alt="Screenshot 2026-06-30 191241" src="https://github.com/user-attachments/assets/475da5df-e21f-436b-b27c-c2bc9f727184" />
+<img width="1872" height="1107" alt="Screenshot 2026-06-30 191241" src="https://github.com/user-attachments/assets/475da5df-e21f-436b-b27c-c2bc9f727184" />
 
 
 
@@ -101,4 +101,5 @@ Terraform provisions every AWS resource required to build this environment.
 
 ## Architecture Diagram
 
-![Architecture](docs/images/architecture.png)
+<img width="1302" height="697" alt="Screenshot 2026-06-30 194558" src="https://github.com/user-attachments/assets/fa0dc332-6aa4-49f3-a27c-f96b058dc57f" />
+
