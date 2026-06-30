@@ -28,6 +28,37 @@
 
 ---
 
+
+# Architecture Overview
+
+The deployment follows a layered AWS architecture.
+
+Users access the application through a custom Route53 domain secured with HTTPS.
+
+Requests are forwarded to an Application Load Balancer, which distributes traffic to ECS Fargate tasks running the Snipe-IT application inside private subnets.
+
+The application communicates securely with an Amazon RDS MySQL database located in isolated database subnets.
+
+Container images are pulled from Amazon Elastic Container Registry, while Terraform stores its remote state inside Amazon S3.
+
+The entire infrastructure is deployed automatically using reusable Terraform modules and GitHub Actions pipelines.
+
+---
+
+# Architecture Diagram
+<img width="1302" height="697" alt="Screenshot 2026-06-30 194558" src="https://github.com/user-attachments/assets/bbb136e7-a0e2-4d44-8afc-629f7b801dac" />
+
+
+The following diagram illustrates the complete AWS architecture used throughout this project.
+
+It demonstrates the interaction between Route53, ACM, the Application Load Balancer, ECS Fargate, Amazon RDS, Terraform, and GitHub Actions.
+
+---
+
+# Repository Structure
+
+The repository has been organised to separate the application, infrastructure, bootstrap resources and automation workflows into clear, reusable components.
+
 # Project Overview
 
 This project demonstrates a complete end-to-end deployment of the open-source **Snipe-IT Asset Management System** onto Amazon Web Services using modern DevOps practices.
