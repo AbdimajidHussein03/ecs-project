@@ -812,3 +812,295 @@ The screenshots below demonstrate successful execution of each workflow.
 Each workflow completed successfully and formed part of the final deployment process.
 
 > 📸 **Apply Screenshot:** GitHub Actions Workflow Overview
+
+# Security
+
+Security was considered throughout both the infrastructure and deployment process. Rather than focusing solely on deploying the application, several best practices were implemented to reduce risk and improve the overall security of the platform.
+
+## HTTPS Encryption
+
+The application is served exclusively over HTTPS using AWS Certificate Manager (ACM).
+
+Terraform automatically provisions the SSL/TLS certificate and validates ownership of the domain through Amazon Route53 before attaching the certificate to the Application Load Balancer.
+
+This ensures all communication between users and the application is encrypted.
+
+---
+
+## Security Groups
+
+Separate security groups were created for each AWS service to enforce the principle of least privilege.
+
+### Application Load Balancer
+
+- Allows inbound HTTP (80)
+- Allows inbound HTTPS (443)
+- Forwards traffic only to ECS
+
+### ECS Service
+
+- Accepts traffic only from the Application Load Balancer
+- No direct public access
+- Outbound connectivity only where required
+
+### Amazon RDS
+
+- Accepts database connections only from ECS
+- No public access
+- Isolated from external traffic
+
+This layered approach ensures every service only communicates with the components it requires.
+
+---
+
+## GitHub OIDC Authentication
+
+One of the biggest security improvements implemented during this project was replacing long-lived AWS Access Keys with GitHub OpenID Connect (OIDC).
+
+Instead of storing AWS credentials inside GitHub Secrets, GitHub Actions temporarily assumes an IAM role whenever a workflow executes.
+
+This approach provides several advantages:
+
+- No permanent AWS credentials stored in GitHub
+- Temporary credentials generated for each workflow
+- Reduced risk if a repository is compromised
+- AWS recommended authentication method
+
+---
+
+## Terraform Remote State
+
+Terraform state is stored remotely inside Amazon S3 rather than locally.
+
+Using a remote backend provides:
+
+- Centralised infrastructure state
+- Reduced risk of state corruption
+- Easier collaboration
+- Infrastructure recovery
+- State locking
+
+This follows Terraform best practices and prevents infrastructure drift.
+
+---
+
+# Challenges & Lessons Learned
+
+This project involved significantly more than simply deploying an application.
+
+Throughout development I encountered a number of real-world challenges which required investigation, troubleshooting and a deeper understanding of AWS, Terraform and GitHub Actions.
+
+Overcoming these issues helped reinforce many of the concepts learned throughout the project.
+
+---
+
+## Understanding Terraform State
+
+One of the biggest learning points throughout this project was understanding how Terraform manages infrastructure using state files.
+
+Initially, I underestimated the importance of the Terraform state file until encountering situations where infrastructure and state became inconsistent.
+
+Recovering remote state from Amazon S3 and understanding how Terraform tracks resources provided valuable insight into how Infrastructure as Code operates behind the scenes.
+
+This also reinforced why Terraform state should never be manually edited unless absolutely necessary.
+
+---
+
+## Separating Bootstrap Infrastructure
+
+Another important lesson was understanding that some infrastructure should exist independently from the main application deployment.
+
+Initially, all resources were managed together.
+
+As the project grew, it became clear that IAM resources responsible for GitHub authentication should remain separate from the application infrastructure.
+
+Creating a dedicated bootstrap layer made the deployment cleaner and prevented accidental deletion of resources required by the CI/CD pipelines.
+
+---
+
+## GitHub OIDC Authentication
+
+Configuring GitHub Actions to authenticate using OpenID Connect required a much deeper understanding of IAM trust relationships than expected.
+
+Learning how GitHub exchanges identity tokens with AWS instead of using static credentials demonstrated a much more secure approach to CI/CD authentication.
+
+Although configuring the trust policies took time, the final implementation is significantly more secure than relying on long-lived access keys.
+
+---
+
+## HTTPS & DNS Configuration
+
+Provisioning HTTPS automatically using AWS Certificate Manager initially appeared straightforward but required understanding how ACM validates ownership of a domain.
+
+Terraform was configured to automatically create the required Route53 validation records, allowing certificates to be issued without manual intervention.
+
+Understanding the relationship between Route53, ACM and the Application Load Balancer was one of the most valuable networking lessons from this project.
+
+---
+
+## Container Deployment
+
+Deploying containers locally with Docker was relatively straightforward.
+
+Deploying the same container to ECS introduced additional considerations including:
+
+- Task definitions
+- IAM roles
+- Security groups
+- Load balancer integration
+- Health checks
+- Container logging
+
+Working through these issues provided a much better understanding of how production container platforms operate.
+
+---
+
+## Repository Organisation
+
+As the project grew, keeping the repository organised became increasingly important.
+
+The repository was gradually restructured to separate:
+
+- Application source code
+- Bootstrap resources
+- Infrastructure
+- GitHub workflows
+- ClickOps documentation
+
+This improved maintainability and made the project significantly easier to navigate.
+
+---
+
+## CI/CD Automation
+
+Implementing multiple GitHub Actions workflows demonstrated how repetitive deployment tasks can be automated.
+
+Rather than manually building Docker images or running Terraform commands, the pipelines now provide a repeatable deployment process from source code to a running application.
+
+This was one of the most rewarding aspects of the project.
+
+---
+
+# Future Improvements
+
+Although the current implementation satisfies the project requirements, there are several areas that could be improved if development continued.
+
+## Blue/Green Deployments
+
+Implement blue/green deployment strategies to minimise downtime during application releases.
+
+---
+
+## Amazon ECS Auto Scaling
+
+Configure ECS Service Auto Scaling based on:
+
+- CPU utilisation
+- Memory utilisation
+- Request count
+
+allowing the application to automatically respond to increased demand.
+
+---
+
+## AWS CloudWatch Alarms
+
+Create CloudWatch alarms for:
+
+- High CPU usage
+- High memory usage
+- ECS task failures
+- Application Load Balancer health
+- RDS metrics
+
+This would improve operational monitoring and incident response.
+
+---
+
+## AWS WAF
+
+Integrate AWS Web Application Firewall to provide protection against common web-based attacks including:
+
+- SQL Injection
+- Cross-Site Scripting (XSS)
+- Malicious IP addresses
+- Rate limiting
+
+---
+
+## AWS Secrets Manager
+
+Currently, sensitive application configuration is supplied through Terraform variables.
+
+A future improvement would be migrating these secrets into AWS Secrets Manager, allowing ECS to retrieve secrets securely at runtime.
+
+---
+
+## Infrastructure Testing
+
+Introduce additional automated validation including:
+
+- Terratest
+- InSpec
+- End-to-end deployment testing
+
+to further improve deployment confidence.
+
+---
+
+## Multi-Environment Deployments
+
+Extend the project to support:
+
+- Development
+- Staging
+- Production
+
+using reusable Terraform modules with environment-specific variables.
+
+---
+
+## Monitoring Dashboard
+
+Create CloudWatch dashboards to visualise:
+
+- ECS Service health
+- Application availability
+- ALB metrics
+- Database metrics
+
+providing a central operational dashboard.
+
+---
+
+# Conclusion
+
+This project demonstrates how modern DevOps practices can be used to deploy and manage a production-style application on AWS.
+
+Starting from a manual ClickOps deployment and progressing towards a fully automated Infrastructure as Code solution provided valuable practical experience across cloud infrastructure, containerisation and CI/CD automation.
+
+Through Terraform, Docker and GitHub Actions, the deployment process has become repeatable, consistent and significantly easier to manage.
+
+More importantly, the project strengthened my understanding of AWS networking, Infrastructure as Code, container orchestration and deployment automation while highlighting the importance of security, modular design and maintainable infrastructure.
+
+Although there are many possible future enhancements, the current implementation successfully delivers a complete end-to-end deployment pipeline capable of provisioning, deploying and destroying the entire application environment through code.
+
+---
+
+# Author
+
+**Abdimajid Hussein**
+
+BSc Computer Science | Aspiring Cloud & DevOps Engineer
+
+GitHub: https://github.com/AbdimajidHussein03
+
+LinkedIn: *(Add your LinkedIn profile here)*
+
+---
+
+## Acknowledgements
+
+This project was completed as part of my continued journey into Cloud Engineering, DevOps and Infrastructure as Code.
+
+The goal was not only to build a working AWS deployment, but also to gain a deeper understanding of how modern cloud-native applications are deployed, automated and managed using industry-standard tools.
