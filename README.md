@@ -727,9 +727,6 @@ Running a Terraform plan before deployment follows Infrastructure as Code best p
 ✔ Infrastructure validated successfully
 
 <img width="1902" height="1115" alt="Screenshot 2026-06-30 191710" src="https://github.com/user-attachments/assets/2e67fcc2-e000-43f3-b207-f7ed6c36dd83" />
-<img width="1872" height="1057" alt="Screenshot 2026-06-30 191321" src="https://github.com/user-attachments/assets/e9a3ada6-1b9b-46b3-81fd-8527fdad9400" />
-<img width="1912" height="1073" alt="Screenshot 2026-06-30 191625" src="https://github.com/user-attachments/assets/ad519eb6-f8de-4649-9aec-106dc5a9e2c8" />
-<img width="1912" height="1095" alt="Screenshot 2026-06-30 191459" src="https://github.com/user-attachments/assets/dccde4c5-3452-4f70-a6d4-c0b2afe3582c" />
 
 
 ---
