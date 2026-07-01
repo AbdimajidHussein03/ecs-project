@@ -684,7 +684,8 @@ This workflow forms the Continuous Integration (CI) portion of the project.
 ✔ Push Docker Image
 
 ✔ Pipeline Completed Successfully
-<img width="1872" height="1057" alt="Screenshot 2026-06-30 191321" src="https://github.com/user-attachments/assets/ecbcd656-4ceb-4ce9-ae56-e185ff647b07" />
+<img width="1856" height="655" alt="build" src="https://github.com/user-attachments/assets/76ac5155-d6d2-40d2-9239-66f7ef2bd078" />
+
 
 
 ---
@@ -704,6 +705,8 @@ The workflow performs:
 
 Running a Terraform plan before deployment follows Infrastructure as Code best practices by previewing proposed infrastructure changes before any AWS resources are modified.
 
+<img width="1902" height="1115" alt="Screenshot 2026-06-30 191710" src="https://github.com/user-attachments/assets/2e67fcc2-e000-43f3-b207-f7ed6c36dd83" />
+
 ### Pipeline Summary
 
 ✔ Terraform fmt
@@ -715,8 +718,6 @@ Running a Terraform plan before deployment follows Infrastructure as Code best p
 ✔ Terraform plan
 
 ✔ Infrastructure validated successfully
-
-<img width="1902" height="1115" alt="Screenshot 2026-06-30 191710" src="https://github.com/user-attachments/assets/2e67fcc2-e000-43f3-b207-f7ed6c36dd83" />
 
 
 ---
@@ -747,6 +748,8 @@ After deployment completes successfully, the ECS service automatically pulls the
 
 The result is a fully deployed containerised application available over HTTPS.
 
+<img width="1912" height="1073" alt="Screenshot 2026-06-30 191625" src="https://github.com/user-attachments/assets/36ea8a91-799b-48e3-af45-0767aa50d943" />
+
 ### Pipeline Summary
 
 ✔ Authenticate using GitHub OIDC
@@ -760,8 +763,6 @@ The result is a fully deployed containerised application available over HTTPS.
 ✔ ECS Service Started
 
 ✔ HTTPS Application Available
-
-<img width="1912" height="1073" alt="Screenshot 2026-06-30 191625" src="https://github.com/user-attachments/assets/36ea8a91-799b-48e3-af45-0767aa50d943" />
 
 
 ---
@@ -789,6 +790,9 @@ After investigating the issue, the repository configuration was updated to suppo
 
 This highlighted the importance of understanding resource dependencies when designing Infrastructure as Code.
 
+
+<img width="1891" height="892" alt="Terraform destroy pipeline" src="https://github.com/user-attachments/assets/2febb6a2-2c4b-4762-9392-886cc1aa8be2" />
+
 ### Pipeline Summary
 
 ✔ Authenticate using GitHub OIDC
@@ -799,7 +803,6 @@ This highlighted the importance of understanding resource dependencies when desi
 
 ✔ Infrastructure Removed Successfully
 
-<img width="1891" height="892" alt="Terraform destroy pipeline" src="https://github.com/user-attachments/assets/2febb6a2-2c4b-4762-9392-886cc1aa8be2" />
 
 ---
 
