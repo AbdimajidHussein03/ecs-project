@@ -48,7 +48,7 @@ The entire infrastructure is deployed automatically using reusable Terraform mod
 
 # Architecture Diagram
 <img width="1302" height="697" alt="Screenshot 2026-06-30 194558" src="https://github.com/user-attachments/assets/7b05954f-dd11-4357-b72c-51b2333a58f1" />
-<img width="1207" height="615" alt="Screenshot 2026-07-01 133250" src="https://github.com/user-attachments/assets/685bdf76-cc25-4ee0-8574-641f7a272eea" />
+
 
 
 
