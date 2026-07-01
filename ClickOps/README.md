@@ -16,19 +16,21 @@ Before deploying to AWS, the application was containerised and tested locally us
 
 An Amazon ECR repository was created to store the Docker image for the application.
 
-![ECR Repository](ClickOps/Screenshot%202026-06-21%20151318.png)
+<img width="1878" height="1007" alt="docker-local-running" src="https://github.com/user-attachments/assets/1895b0c9-86c7-487a-94c6-57bab74f17a7" />
+
 
 After creating the repository, the Docker image was successfully pushed to Amazon ECR.
 
-![Docker Image in ECR](ClickOps/Screenshot%202026-06-21%20151848.png)
+<img width="1866" height="877" alt="ecr-repository" src="https://github.com/user-attachments/assets/696e692d-0e01-4890-bfa1-e4b63d2d6583" />
+
 
 ---
 
 ## 3. Creating the Amazon ECS Cluster
 
 An Amazon ECS Fargate cluster was configured to host the application without managing EC2 instances.
+<img width="1877" height="933" alt="cluster" src="https://github.com/user-attachments/assets/71c2879e-ab79-440b-ac91-89e9f493d889" />
 
-![ECS Cluster Configuration](ClickOps/Screenshot%202026-06-21%20152331.png)
 
 The cluster was then successfully created.
 
