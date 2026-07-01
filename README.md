@@ -670,7 +670,7 @@ Whenever changes are pushed to the application, GitHub Actions automatically:
 By automating this process, the application image remains version controlled and deployment-ready without requiring any manual interaction.
 
 This workflow forms the Continuous Integration (CI) portion of the project.
-
+<img width="1856" height="655" alt="build" src="https://github.com/user-attachments/assets/76ac5155-d6d2-40d2-9239-66f7ef2bd078" />
 ### Pipeline Summary
 
 ✔ Checkout Repository
@@ -684,7 +684,7 @@ This workflow forms the Continuous Integration (CI) portion of the project.
 ✔ Push Docker Image
 
 ✔ Pipeline Completed Successfully
-<img width="1856" height="655" alt="build" src="https://github.com/user-attachments/assets/76ac5155-d6d2-40d2-9239-66f7ef2bd078" />
+
 
 
 
@@ -747,8 +747,8 @@ Terraform automatically creates:
 After deployment completes successfully, the ECS service automatically pulls the latest Docker image from Amazon ECR before starting the application.
 
 The result is a fully deployed containerised application available over HTTPS.
+<img width="1806" height="741" alt="deploy" src="https://github.com/user-attachments/assets/5eb4e86a-4902-4841-aade-e40a419e4a06" />
 
-<img width="1912" height="1073" alt="Screenshot 2026-06-30 191625" src="https://github.com/user-attachments/assets/36ea8a91-799b-48e3-af45-0767aa50d943" />
 
 ### Pipeline Summary
 
