@@ -7,8 +7,8 @@ Before automating the infrastructure using Terraform and GitHub Actions, I first
 ## 1. Running the Application Locally
 
 Before deploying to AWS, the application was containerised and tested locally using Docker Desktop.
+<img width="1372" height="710" alt="Screenshot 2026-06-21 150643" src="https://github.com/user-attachments/assets/5299a80f-4435-42d7-bf99-a88d58b8ad26" />
 
-![Docker Desktop](ClickOps/Screenshot%202026-06-21%20150643.png)
 
 ---
 
